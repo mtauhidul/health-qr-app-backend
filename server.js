@@ -12,6 +12,8 @@ const { securityHeaders, apiLimiter } = require("./middleware/security");
 const app = express();
 const PORT = config.server.port;
 
+app.set("trust proxy", 1);
+
 // Apply security middleware
 app.use(securityHeaders);
 app.use(express.json({ limit: "1mb" }));

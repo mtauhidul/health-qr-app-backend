@@ -1,4 +1,3 @@
-// services/driveService.js
 const { google } = require("googleapis");
 const fs = require("fs");
 const path = require("path");
@@ -11,7 +10,10 @@ class DriveService {
   initializeDrive() {
     try {
       const auth = new google.auth.GoogleAuth({
-        keyFile: process.env.GOOGLE_CREDENTIALS,
+        keyFile:
+          process.env.NODE_ENV === "production"
+            ? "/app/google-service-account-key.json" // Path on Heroku
+            : "./google-service-account-key.json", // Path for local development
         scopes: ["https://www.googleapis.com/auth/drive"],
       });
 
@@ -65,6 +67,7 @@ class DriveService {
       throw error;
     }
   }
+
   async uploadFile(filePath, fileName, folderId) {
     const fileMetadata = {
       name: fileName,
