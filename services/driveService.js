@@ -44,7 +44,7 @@ class DriveService {
     const timestamp = `${formattedDate} - ${formattedTime}`;
 
     // Create folder name
-    const folderName = `/${timestamp}`;
+    const folderName = `${timestamp}`;
 
     const folderMetadata = {
       name: folderName,
