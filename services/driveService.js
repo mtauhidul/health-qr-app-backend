@@ -11,7 +11,7 @@ class DriveService {
   initializeDrive() {
     try {
       const auth = new google.auth.GoogleAuth({
-        keyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+        keyFile: process.env.GOOGLE_CREDENTIALS,
         scopes: ["https://www.googleapis.com/auth/drive"],
       });
 
