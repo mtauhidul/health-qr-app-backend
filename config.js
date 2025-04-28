@@ -15,7 +15,7 @@ module.exports = {
   },
 
   google: {
-    credentialsFile: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+    credentialsFile: process.env.GOOGLE_CREDENTIALS,
     parentFolderId: process.env.GOOGLE_DRIVE_PARENT_FOLDER_ID,
   },
 
