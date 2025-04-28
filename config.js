@@ -14,6 +14,7 @@ module.exports = {
     tempDir: "./uploads",
   },
 
+  // GOOGLE DRIVE CONFIGURATION
   google: {
     credentialsFile: process.env.GOOGLE_CREDENTIALS,
     parentFolderId: process.env.GOOGLE_DRIVE_PARENT_FOLDER_ID,
