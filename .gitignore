@@ -1,0 +1,8 @@
+.env
+node_modules
+dist
+.DS_Store
+.vscode
+*.log
+google-service-account-key.json
+
