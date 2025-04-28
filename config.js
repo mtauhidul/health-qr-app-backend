@@ -16,7 +16,13 @@ module.exports = {
 
   // GOOGLE DRIVE CONFIGURATION
   google: {
+    // Use service account JSON from environment if available
+    serviceAccount: process.env.GOOGLE_SERVICE_ACCOUNT
+      ? JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT)
+      : null,
+    // Fall back to credentials file for local development
     credentialsFile: process.env.GOOGLE_CREDENTIALS,
+    // Parent folder ID is the same in both environments
     parentFolderId: process.env.GOOGLE_DRIVE_PARENT_FOLDER_ID,
   },
 

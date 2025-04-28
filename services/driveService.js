@@ -1,6 +1,7 @@
 const { google } = require("googleapis");
 const fs = require("fs");
 const path = require("path");
+const config = require("../config");
 
 class DriveService {
   constructor() {
@@ -9,13 +10,27 @@ class DriveService {
 
   initializeDrive() {
     try {
-      const auth = new google.auth.GoogleAuth({
-        keyFile:
-          process.env.NODE_ENV === "production"
-            ? "/app/google-service-account-key.json" // Path on Heroku
-            : "./google-service-account-key.json", // Path for local development
-        scopes: ["https://www.googleapis.com/auth/drive"],
-      });
+      let auth;
+
+      // For Heroku: Use environment variables directly
+      if (process.env.GOOGLE_SERVICE_ACCOUNT) {
+        const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT);
+        auth = new google.auth.GoogleAuth({
+          credentials: credentials,
+          scopes: ["https://www.googleapis.com/auth/drive"],
+        });
+      }
+      // For local development: Use credentials file from config
+      else if (config.google.credentialsFile) {
+        auth = new google.auth.GoogleAuth({
+          keyFile: config.google.credentialsFile,
+          scopes: ["https://www.googleapis.com/auth/drive"],
+        });
+      } else {
+        throw new Error(
+          "No Google credentials found in environment variables or config"
+        );
+      }
 
       return google.drive({ version: "v3", auth });
     } catch (error) {
@@ -24,7 +39,6 @@ class DriveService {
     }
   }
 
-  // In your driveService.js file
   async createTimestampedFolder(parentFolderId) {
     // Get current date and time
     const now = new Date();
