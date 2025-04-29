@@ -10,7 +10,7 @@ module.exports = {
 
   upload: {
     maxFileSize: 15 * 1024 * 1024, // 15MB
-    maxFiles: 20,
+    maxFiles: 30,
     tempDir: "./uploads",
   },
 
@@ -27,9 +27,9 @@ module.exports = {
   },
 
   validation: {
-    minImageCount: 8,
+    minImageCount: 1,
     maxImageCount: 20,
-    maxAudioCount: 1,
+    maxAudioCount: 10,
     allowedImageTypes: ["image/jpeg", "image/png", "image/gif", "image/webp"],
     allowedAudioTypes: [
       "audio/mpeg",
